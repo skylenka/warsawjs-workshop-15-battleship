@@ -1,0 +1,44 @@
+h1 {
+  text-align: center;
+  margin-top: 20px; }
+
+#app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  #app .game-field {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 300px;
+    height: 300px;
+    border: 1px solid black;
+    margin: 5%;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    box-sizing: border-box; }
+    #app .game-field .cell {
+      text-align: center;
+      vertical-align: middle;
+      -ms-flex-preferred-size: 10%;
+          flex-basis: 10%;
+      -webkit-user-select: none;
+         -moz-user-select: none;
+          -ms-user-select: none;
+              user-select: none;
+      border-style: solid;
+      border-color: lightgray;
+      border-width: 1px;
+      background-color: #fff;
+      box-sizing: border-box; }
