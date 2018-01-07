@@ -27,7 +27,8 @@ h1 {
     -webkit-box-direction: normal;
         -ms-flex-direction: row;
             flex-direction: row;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    line-height: 1.7; }
     #app .game-field .cell {
       text-align: center;
       vertical-align: middle;
@@ -42,3 +43,11 @@ h1 {
       border-width: 1px;
       background-color: #fff;
       box-sizing: border-box; }
+      #app .game-field .cell.top {
+        border-top-color: black; }
+      #app .game-field .cell.right {
+        border-right-color: black; }
+      #app .game-field .cell.bottom {
+        border-bottom-color: black; }
+      #app .game-field .cell.left {
+        border-left-color: black; }

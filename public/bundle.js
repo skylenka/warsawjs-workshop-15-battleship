@@ -63,14 +63,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	// import '../styles/styles.scss';
 	var main = function main() {
-
+	    var players = ['user', 'computer'];
 	    var app = document.getElementById('app');
-	    app.append((0, _GameField2.default)('computer'));
-	    app.append((0, _GameField2.default)('user'));
+	    _GameState2.default.placeShips(players[0]);
+	    _GameState2.default.placeShips(players[1]);
+	    app.appendChild((0, _GameField2.default)(players[0]));
+	    app.appendChild((0, _GameField2.default)(players[1]));
+
 	    _GameState2.default.startGame();
-	    console.log(_GameState2.default.shootingTurn);
 	};
 
 	main();
@@ -139,14 +140,14 @@
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	var Cell = function () {
-	    function Cell(correspondingShip, attempted, cellAttempt, fieldType, activeField) {
+	    function Cell(correspondingShip, attempted, cellAttempt, fieldType, activeField, borders) {
 	        _classCallCheck(this, Cell);
 
 	        this.htmlNode = document.createElement('div');
 	        this.attempted = attempted;
 	        this.correspondingShip = correspondingShip;
 
-	        this.htmlNode.className = 'cell';
+	        this.htmlNode.className = 'cell ' + borders;
 	        this.htmlNode.append(String.fromCharCode(0x000A0));
 	        if (fieldType === 'computer' && activeField) {
 	            this.htmlNode.addEventListener('click', this.attemptCell.bind(this));

@@ -1,14 +1,15 @@
-// import '../styles/styles.scss';
 import GameField from './GameField';
 import GameState from './GameState';
 
 const main = () => {
-
+    const players = ['user', 'computer']; 
     const app = document.getElementById('app');
-    app.append(GameField('computer'));
-    app.append(GameField('user'));
+    GameState.placeShips(players[0]);
+    GameState.placeShips(players[1]);
+    app.appendChild(GameField(players[0]));
+    app.appendChild(GameField(players[1]));
+
     GameState.startGame();
-    console.log(GameState.shootingTurn);
 };
 
 main();
