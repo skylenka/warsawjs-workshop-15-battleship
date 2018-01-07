@@ -89,15 +89,35 @@
 
 	var _Cell2 = _interopRequireDefault(_Cell);
 
+	var _GameState = __webpack_require__(4);
+
+	var _GameState2 = _interopRequireDefault(_GameState);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	var GameField = function GameField(type) {
 
 	    var gameField = document.createElement('div');
 	    gameField.className = 'game-field ' + type;
-	    for (var i = 0; i < 100; i++) {
-	        gameField.append(new _Cell2.default(null, false, null, type, true).htmlNode);
-	    }
+
+	    var cells = _GameState2.default.cells[type].map(function (row, x) {
+	        return row.map(function (cell, y) {
+	            var borders = '';
+	            if (cell.correspondingShip) {
+	                if (x !== 0 && !_GameState2.default.cells[type][x - 1][y].correspondingShip) borders += 'top ';
+	                if (y !== 9 && !_GameState2.default.cells[type][x][y + 1].correspondingShip) borders += 'right ';
+	                if (x !== 9 && !_GameState2.default.cells[type][x + 1][y].correspondingShip) borders += 'bottom ';
+	                if (y !== 0 && !_GameState2.default.cells[type][x][y - 1].correspondingShip) borders += 'left ';
+	            }
+	            return new _Cell2.default(cell.correspondingShip, false, null, type, true, borders);
+	        });
+	    });
+
+	    cells.map(function (row) {
+	        row.map(function (cell) {
+	            gameField.append(cell.htmlNode);
+	        });
+	    });
 
 	    return gameField;
 	};
@@ -179,19 +199,19 @@
 	        };
 	        this.cells = {
 	            user: [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
-	                [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
-	                    ({
+	                return [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
+	                    return {
 	                        correspondingShip: null,
 	                        attempted: false
-	                    });
+	                    };
 	                });
 	            }),
 	            computer: [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
-	                [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
-	                    ({
+	                return [].concat(_toConsumableArray(new Array(10).keys())).map(function () {
+	                    return {
 	                        correspondingShip: null,
 	                        attempted: false
-	                    });
+	                    };
 	                });
 	            })
 	        };
@@ -215,6 +235,8 @@
 	        value: function startGame() {
 	            var players = ['user', 'computer'];
 	            this.shootingTurn = players[Math.round(Math.random())];
+	            this.placeShips(players[0]);
+	            this.placeShips(players[1]);
 	        }
 	    }]);
 
@@ -222,6 +244,7 @@
 	}();
 
 	;
+
 	exports.default = new GameState();
 
 /***/ }),
